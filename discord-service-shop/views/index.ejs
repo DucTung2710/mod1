@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= shopName %> - Dịch vụ nhanh chóng</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark">SO</span>
+      <span><%= shopName %></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Dịch vụ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Discord service shop</p>
+        <h1>Super Order</h1>
+        <p>Dịch vụ nhanh chóng, rõ ràng, hỗ trợ tận tình.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#services">Xem dịch vụ</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <span class="pulse"></span>
+        <h2>Đặt đơn an toàn</h2>
+        <p>Form chỉ thu thông tin liên hệ và ghi chú đơn hàng. Không thu mật khẩu, token hoặc mã 2FA.</p>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div>
+        <h2>Shop hỗ trợ dịch vụ Discord gọn gàng</h2>
+        <p>Chọn dịch vụ, để lại Discord/contact, admin sẽ tiếp nhận và xử lý theo trạng thái đơn hàng.</p>
+      </div>
+      <div class="intro-points">
+        <span>Rõ giá</span>
+        <span>Dễ đặt</span>
+        <span>Theo dõi đơn</span>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="section-heading">
+        <p>Dịch vụ</p>
+        <h2>Danh sách hiện có</h2>
+      </div>
+      <div class="service-grid">
+        <% services.forEach((service) => { %>
+          <article class="service-card">
+            <div class="card-top">
+              <span class="status-badge <%= service.status %>"><%= statusText(service.status) %></span>
+              <strong><%= service.price %></strong>
+            </div>
+            <h3><%= service.name %></h3>
+            <p><%= service.description %></p>
+            <a class="btn btn-card" href="/service/<%= service.id %>">Xem chi tiết</a>
+          </article>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><%= shopName %> © <%= currentYear %></p>
+    <p>Không nhập mật khẩu, token hoặc mã 2FA trên website.</p>
+  </footer>
+</body>
+</html>

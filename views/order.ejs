@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đặt hàng - <%= service.name %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="brand-mark">SO</span>
+      <span><%= shopName %></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/">Trang chủ</a>
+      <a href="/service/<%= service.id %>">Chi tiết</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="panel form-panel">
+      <div class="section-heading left">
+        <p>Tạo đơn</p>
+        <h1><%= service.name %></h1>
+        <span class="muted">Giá: <%= service.price %></span>
+      </div>
+
+      <% if (errors.length > 0) { %>
+        <div class="alert error">
+          <% errors.forEach((error) => { %>
+            <div><%= error %></div>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <form class="form-grid" method="post" action="/order/<%= service.id %>" enctype="multipart/form-data">
+        <label>
+          <span>Tên khách hàng</span>
+          <input name="customerName" value="<%= values.customerName || '' %>" maxlength="120" required placeholder="Tên của bạn">
+        </label>
+        <label>
+          <span>Discord username hoặc Discord ID</span>
+          <input name="discord" value="<%= values.discord || '' %>" maxlength="160" required placeholder="username hoặc ID Discord">
+        </label>
+        <label>
+          <span>Dịch vụ muốn mua</span>
+          <input value="<%= service.name %> - <%= service.price %>" readonly>
+        </label>
+        <label>
+          <span>Phương thức liên hệ</span>
+          <input name="contact" value="<%= values.contact || '' %>" maxlength="160" required placeholder="Discord, Facebook, Zalo...">
+        </label>
+        <div class="payment-box wide">
+          <div>
+            <span class="payment-title">QR thanh toán</span>
+            <p>Quét QR để thanh toán, sau đó up ảnh chuyển khoản nếu có.</p>
+          </div>
+          <img src="/images/payment-qr.svg" alt="QR thanh toán">
+        </div>
+        <label class="wide">
+          <span>Ảnh bill / proof thanh toán</span>
+          <input name="paymentProofImage" type="file" accept="image/*">
+        </label>
+        <label class="wide">
+          <span>Ghi chú thêm</span>
+          <textarea name="note" maxlength="1000" rows="5" placeholder="Yêu cầu thêm nếu có. Không nhập mật khẩu, token hoặc mã 2FA."><%= values.note || '' %></textarea>
+        </label>
+        <div class="alert wide">
+          Tuyệt đối không gửi mật khẩu, token, mã 2FA hoặc thông tin đăng nhập nhạy cảm qua form.
+        </div>
+        <div class="button-row wide">
+          <a class="btn btn-soft" href="/service/<%= service.id %>">Quay lại</a>
+          <button class="btn btn-primary" type="submit">Đặt hàng</button>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

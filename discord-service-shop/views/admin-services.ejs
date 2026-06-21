@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quản lý dịch vụ - <%= shopName %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body class="admin-body">
+  <%- include('partials-admin-nav', { shopName }) %>
+  <main class="admin-main">
+    <section class="admin-title">
+      <div>
+        <p>Admin</p>
+        <h1>Quản lý dịch vụ</h1>
+      </div>
+      <a class="btn btn-primary" href="/admin/services/new">Thêm dịch vụ</a>
+    </section>
+
+    <% if (mode === 'new' || mode === 'edit') { %>
+      <section class="admin-panel">
+        <div class="panel-title">
+          <h2><%= mode === 'new' ? 'Thêm dịch vụ mới' : 'Sửa dịch vụ' %></h2>
+          <a class="btn btn-soft" href="/admin/services">Quay lại</a>
+        </div>
+        <% if (errors.length > 0) { %>
+          <div class="alert error">
+            <% errors.forEach((error) => { %><div><%= error %></div><% }) %>
+          </div>
+        <% } %>
+        <form class="form-grid" method="post" action="<%= mode === 'new' ? '/admin/services/new' : '/admin/services/edit/' + service.id %>">
+          <label>
+            <span>Tên dịch vụ</span>
+            <input name="name" value="<%= values.name || '' %>" required>
+          </label>
+          <label>
+            <span>Giá</span>
+            <input name="price" value="<%= values.price || '' %>" required>
+          </label>
+          <label>
+            <span>Trạng thái</span>
+            <select name="status">
+              <option value="in_stock" <%= values.status === 'in_stock' ? 'selected' : '' %>>Còn hàng</option>
+              <option value="out_of_stock" <%= values.status === 'out_of_stock' ? 'selected' : '' %>>Hết hàng</option>
+            </select>
+          </label>
+          <label class="wide">
+            <span>Mô tả</span>
+            <textarea name="description" rows="5" required><%= values.description || '' %></textarea>
+          </label>
+          <button class="btn btn-primary wide" type="submit">Lưu</button>
+        </form>
+      </section>
+    <% } %>
+
+    <section class="admin-panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tên dịch vụ</th>
+              <th>Giá</th>
+              <th>Trạng thái</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% services.forEach((item) => { %>
+              <tr>
+                <td>
+                  <strong><%= item.name %></strong>
+                  <small><%= item.description %></small>
+                </td>
+                <td><%= item.price %></td>
+                <td><span class="status-badge <%= item.status %>"><%= statusText(item.status) %></span></td>
+                <td class="actions">
+                  <a class="btn btn-card" href="/admin/services/edit/<%= item.id %>">Sửa</a>
+                  <form method="post" action="/admin/services/delete/<%= item.id %>" class="inline-form js-confirm-delete">
+                    <button class="btn btn-danger" type="submit">Xóa</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

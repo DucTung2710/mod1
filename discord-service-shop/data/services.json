@@ -1,0 +1,23 @@
+[
+  {
+    "id": "selfbot",
+    "name": "Selfbot",
+    "price": "50k",
+    "description": "Dịch vụ hỗ trợ theo yêu cầu. Không yêu cầu khách nhập mật khẩu hoặc mã 2FA trên web.",
+    "status": "in_stock"
+  },
+  {
+    "id": "super-client",
+    "name": "Super Client",
+    "price": "50k / 2 tháng",
+    "description": "Gói Super Client sử dụng trong 2 tháng.",
+    "status": "in_stock"
+  },
+  {
+    "id": "buff-mem",
+    "name": "Buff Mem",
+    "price": "10k / 1 tháng",
+    "description": "Gói dịch vụ Buff Mem theo tháng.",
+    "status": "in_stock"
+  }
+]

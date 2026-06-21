@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quản lý đơn hàng - <%= shopName %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="admin-body">
+  <%- include('partials-admin-nav', { shopName }) %>
+  <main class="admin-main">
+    <section class="admin-title">
+      <div>
+        <p>Admin</p>
+        <h1>Quản lý đơn hàng</h1>
+      </div>
+      <a class="btn btn-soft" href="/admin">Quay lại</a>
+    </section>
+
+    <section class="admin-panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Khách</th>
+              <th>Discord</th>
+              <th>Liên hệ</th>
+              <th>Dịch vụ</th>
+              <th>Ghi chú</th>
+              <th>Bill</th>
+              <th>Trạng thái</th>
+              <th>Thời gian</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (orders.length === 0) { %>
+              <tr><td colspan="9" class="empty">Chưa có đơn hàng.</td></tr>
+            <% } %>
+            <% orders.forEach((order) => { %>
+              <tr>
+                <td><%= order.id %></td>
+                <td><%= order.customerName %></td>
+                <td><%= order.discord %></td>
+                <td><%= order.contact %></td>
+                <td><strong><%= order.serviceName %></strong><small><%= order.price %></small></td>
+                <td><%= order.note || 'Không có' %></td>
+                <td>
+                  <% if (order.paymentProofImage) { %>
+                    <a class="proof-link" href="<%= order.paymentProofImage %>" target="_blank" rel="noopener">Xem ảnh</a>
+                  <% } else { %>
+                    <span class="muted">Khách chưa up ảnh</span>
+                  <% } %>
+                </td>
+                <td>
+                  <form method="post" action="/admin/orders/status/<%= order.id %>" class="status-form">
+                    <select name="status">
+                      <% ORDER_STATUSES.forEach((status) => { %>
+                        <option value="<%= status %>" <%= order.status === status ? 'selected' : '' %>><%= statusText(status) %></option>
+                      <% }) %>
+                    </select>
+                    <button class="btn btn-card" type="submit">Lưu</button>
+                  </form>
+                </td>
+                <td><%= formatDate(order.createdAt) %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

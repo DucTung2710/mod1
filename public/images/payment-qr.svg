@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" role="img" aria-label="Payment QR placeholder">
+  <rect width="360" height="360" rx="34" fill="#ffffff"/>
+  <rect x="30" y="30" width="300" height="300" rx="24" fill="#f5f7ff"/>
+  <g fill="#11182a">
+    <rect x="58" y="58" width="74" height="74" rx="10"/>
+    <rect x="228" y="58" width="74" height="74" rx="10"/>
+    <rect x="58" y="228" width="74" height="74" rx="10"/>
+  </g>
+  <g fill="#ffffff">
+    <rect x="74" y="74" width="42" height="42" rx="6"/>
+    <rect x="244" y="74" width="42" height="42" rx="6"/>
+    <rect x="74" y="244" width="42" height="42" rx="6"/>
+  </g>
+  <g fill="#21d4c2">
+    <rect x="154" y="58" width="22" height="22" rx="4"/>
+    <rect x="188" y="58" width="46" height="22" rx="4"/>
+    <rect x="154" y="92" width="56" height="22" rx="4"/>
+    <rect x="222" y="92" width="12" height="22" rx="4"/>
+    <rect x="150" y="142" width="28" height="28" rx="5"/>
+    <rect x="190" y="142" width="28" height="28" rx="5"/>
+    <rect x="230" y="142" width="72" height="28" rx="5"/>
+    <rect x="150" y="184" width="52" height="20" rx="5"/>
+    <rect x="214" y="184" width="20" height="20" rx="5"/>
+    <rect x="246" y="184" width="56" height="20" rx="5"/>
+    <rect x="150" y="228" width="20" height="74" rx="5"/>
+    <rect x="184" y="228" width="50" height="20" rx="5"/>
+    <rect x="246" y="228" width="20" height="20" rx="5"/>
+    <rect x="280" y="228" width="22" height="74" rx="5"/>
+    <rect x="184" y="262" width="82" height="40" rx="5"/>
+  </g>
+  <text x="180" y="338" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#11182a">THAY BANG QR THANH TOAN THAT</text>
+</svg>

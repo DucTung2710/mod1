@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard - <%= shopName %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/main.js" defer></script>
+</head>
+<body class="admin-body">
+  <%- include('partials-admin-nav', { shopName }) %>
+  <main class="admin-main">
+    <section class="admin-title">
+      <div>
+        <p>Xin chào, <%= adminUsername %></p>
+        <h1>Dashboard</h1>
+      </div>
+      <a class="btn btn-soft" href="/admin/logout">Đăng xuất</a>
+    </section>
+
+    <section class="stats-grid">
+      <div class="stat-card"><span>Tổng dịch vụ</span><strong><%= services.length %></strong></div>
+      <div class="stat-card"><span>Tổng đơn hàng</span><strong><%= orders.length %></strong></div>
+      <div class="stat-card"><span>Đơn mới</span><strong><%= orders.filter(order => order.status === 'pending').length %></strong></div>
+    </section>
+
+    <section class="admin-panel">
+      <div class="panel-title">
+        <h2>Đơn hàng mới</h2>
+        <a class="btn btn-card" href="/admin/orders">Xem tất cả</a>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Khách</th>
+              <th>Dịch vụ</th>
+              <th>Trạng thái</th>
+              <th>Thời gian</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (newOrders.length === 0) { %>
+              <tr><td colspan="5" class="empty">Chưa có đơn mới.</td></tr>
+            <% } %>
+            <% newOrders.forEach((order) => { %>
+              <tr>
+                <td><%= order.id %></td>
+                <td><%= order.customerName %></td>
+                <td><%= order.serviceName %></td>
+                <td><span class="order-status <%= order.status %>"><%= statusText(order.status) %></span></td>
+                <td><%= formatDate(order.createdAt) %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

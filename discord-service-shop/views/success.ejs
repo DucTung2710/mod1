@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đặt hàng thành công - <%= shopName %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="page-shell centered">
+    <section class="panel success-panel">
+      <div class="success-icon">✓</div>
+      <h1>Đặt hàng thành công</h1>
+      <p>Mã đơn hàng của bạn:</p>
+      <div class="order-code"><%= order.id %></div>
+      <div class="summary-list">
+        <div><span>Dịch vụ</span><strong><%= order.serviceName %></strong></div>
+        <div><span>Giá</span><strong><%= order.price %></strong></div>
+        <div><span>Trạng thái</span><strong><%= statusText(order.status) %></strong></div>
+        <div>
+          <span>Ảnh thanh toán</span>
+          <strong>
+            <% if (order.paymentProofImage) { %>
+              <a href="<%= order.paymentProofImage %>" target="_blank" rel="noopener">Xem ảnh</a>
+            <% } else { %>
+              Khách chưa up ảnh
+            <% } %>
+          </strong>
+        </div>
+        <div><span>Thời gian</span><strong><%= formatDate(order.createdAt) %></strong></div>
+      </div>
+      <div class="button-row center">
+        <a class="btn btn-primary" href="/">Về trang chủ</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
